@@ -1,0 +1,26 @@
+{
+  "variants": {
+    "axis=x,ominous=false": {
+      "model": "gik:block/cardboard",
+      "y": 90
+    },
+    "axis=x,ominous=true": {
+      "model": "gik:block/cardboard_swap",
+      "y": 90
+    },
+    "axis=y,ominous=false": {
+      "model": "gik:block/cardboard",
+      "x": 90
+    },
+    "axis=y,ominous=true": {
+      "model": "gik:block/cardboard_swap",
+      "x": 90
+    },
+    "axis=z,ominous=false": {
+      "model": "gik:block/cardboard"
+    },
+    "axis=z,ominous=true": {
+      "model": "gik:block/cardboard_swap"
+    }
+  }
+}

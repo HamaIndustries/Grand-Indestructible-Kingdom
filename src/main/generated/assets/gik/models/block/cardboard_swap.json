@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube_directional",
+  "textures": {
+    "down": "gik:block/cardboard_top",
+    "east": "gik:block/cardboard_side",
+    "north": "gik:block/cardboard_front_swap",
+    "particle": "gik:block/cardboard_top",
+    "south": "gik:block/cardboard_front_swap",
+    "up": "gik:block/cardboard_top",
+    "west": "gik:block/cardboard_side"
+  }
+}

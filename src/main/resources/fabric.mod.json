@@ -1,0 +1,44 @@
+{
+	"schemaVersion": 1,
+	"id": "gik",
+	"version": "${version}",
+	"name": "Grand Indestructible Kingdom",
+	"description": "The strongest fortress in the entire world!",
+	"authors": [
+		"hama",
+		"keyberries"
+	],
+	"contact": {
+		"homepage": "https://en.wikipedia.org/wiki/Cardboard"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/gik/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+          "symbolics.division.gik.GIK"
+		],
+		"client": [
+			"symbolics.division.gik.GIKClient"
+		],
+		"fabric-datagen": [
+			"symbolics.division.gik.GIKDataGen"
+		]
+	},
+	"mixins": [
+		"gik.mixins.json",
+		{
+			"config": "gik.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.17.2",
+		"minecraft": "~1.21.8",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
