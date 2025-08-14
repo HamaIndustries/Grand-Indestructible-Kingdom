@@ -1,5 +1,5 @@
 {
-  "parent": "gik:block/directed_slab",
+  "parent": "gik:block/directed_slab_top",
   "textures": {
     "back": "gik:block/cardboard_corrugation",
     "front": "gik:block/cardboard_corrugation",

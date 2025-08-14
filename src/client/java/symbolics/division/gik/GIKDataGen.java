@@ -4,14 +4,16 @@ import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.minecraft.block.Block;
+import net.minecraft.block.enums.SlabType;
 import net.minecraft.client.data.*;
 import net.minecraft.client.render.model.json.WeightedVariant;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
+import symbolics.division.gik.block.CardboardBlock;
 
-import static net.minecraft.client.data.BlockStateModelGenerator.*;
-import static symbolics.division.gik.block.CardboardBlock.AXIS;
-import static symbolics.division.gik.block.CardboardBlock.SINISTER;
+import java.util.Optional;
 
 public class GIKDataGen implements DataGeneratorEntrypoint {
     @Override
@@ -27,40 +29,66 @@ public class GIKDataGen implements DataGeneratorEntrypoint {
 
         @Override
         public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
-            Identifier id = TextureMap.getId(GIK.CARDBOARD);
-            TextureMap textures = getBlockTexture(id, false);
-            WeightedVariant weightedVariant = BlockStateModelGenerator.createWeightedVariant(
-                    Models.CUBE_DIRECTIONAL.upload(GIK.CARDBOARD, textures, blockStateModelGenerator.modelCollector)
+            blockStateModelGenerator.blockStateCollector.accept(
+                    registerCardboard(GIK.CARDBOARD, "cardboard", blockStateModelGenerator)
+                            .coordinate(
+                                    BlockStateVariantMap.operations(CardboardBlock.AXIS)
+                                            .register(Direction.Axis.Z, BlockStateModelGenerator.NO_OP)
+                                            .register(Direction.Axis.X, BlockStateModelGenerator.ROTATE_Y_90)
+                                            .register(Direction.Axis.Y, BlockStateModelGenerator.NO_OP)
+                            )
             );
-            TextureMap texturesSwap = getBlockTexture(id.withSuffixedPath("_swap"), true);
-            WeightedVariant weightedVariantSwap = BlockStateModelGenerator.createWeightedVariant(
-                    Models.CUBE_DIRECTIONAL.upload(GIK.CARDBOARD, "_swap", texturesSwap, blockStateModelGenerator.modelCollector)
+            blockStateModelGenerator.blockStateCollector.accept(
+                    registerCardboard(GIK.VERTICAL_CARDBOARD, "vertical_cardboard", blockStateModelGenerator)
+                            .coordinate(
+                                    BlockStateVariantMap.operations(CardboardBlock.AXIS)
+                                            .register(Direction.Axis.Z, BlockStateModelGenerator.ROTATE_X_90)
+                                            .register(Direction.Axis.X, BlockStateModelGenerator.ROTATE_X_90.then(BlockStateModelGenerator.ROTATE_Y_90))
+                                            .register(Direction.Axis.Y, BlockStateModelGenerator.NO_OP)
+                            )
             );
-            blockStateModelGenerator.registerItemModel(GIK.CARDBOARD);
-            blockStateModelGenerator.blockStateCollector
-                    .accept(
-                            VariantsBlockModelDefinitionCreator.of(GIK.CARDBOARD)
-                                    .with(createBooleanModelMap(SINISTER, weightedVariantSwap, weightedVariant))
-                                    .coordinate(
-                                            BlockStateVariantMap.operations(AXIS)
-                                                    .register(Direction.Axis.Y, ROTATE_X_90)
-                                                    .register(Direction.Axis.X, ROTATE_Y_90)
-                                                    .register(Direction.Axis.Z, NO_OP)
-                                    )
+
+        }
+
+        private static VariantsBlockModelDefinitionCreator registerCardboard(Block block, String name, BlockStateModelGenerator blockStateModelGenerator) {
+            Identifier id = TextureMap.getId(block);
+            TextureMap textures = getBlockTexture(id, block);
+            Model slabModel = new Model(Optional.of(GIK.id("block/directed_slab")), Optional.empty(), TextureKey.TOP, TextureKey.SIDE, TextureKey.FRONT, TextureKey.BACK);
+            Model slabModelTop = new Model(Optional.of(GIK.id("block/directed_slab_top")), Optional.of("_top"), TextureKey.TOP, TextureKey.SIDE, TextureKey.FRONT, TextureKey.BACK);
+
+            WeightedVariant bottom = BlockStateModelGenerator.createWeightedVariant(
+                    slabModel.upload(block, textures, blockStateModelGenerator.modelCollector)
+            );
+            WeightedVariant top = BlockStateModelGenerator.createWeightedVariant(
+                    slabModelTop.upload(block, textures, blockStateModelGenerator.modelCollector)
+            );
+
+            Model blockModel = new Model(Optional.of(GIK.id("block/cardboard_orientable")), Optional.empty(), TextureKey.TOP, TextureKey.SIDE, TextureKey.FRONT, TextureKey.BACK);
+            WeightedVariant full = BlockStateModelGenerator.createWeightedVariant(
+                    blockModel.uploadWithoutVariant(block, "_full", textures, blockStateModelGenerator.modelCollector)
+            );
+
+//            blockStateModelGenerator.registerItemModel(block);
+
+            return VariantsBlockModelDefinitionCreator.of(block)
+                    .with(
+                            BlockStateVariantMap.models(Properties.SLAB_TYPE)
+                                    .register(SlabType.BOTTOM, bottom)
+                                    .register(SlabType.TOP, top)
+                                    .register(SlabType.DOUBLE, full)
                     );
         }
 
-        private static TextureMap getBlockTexture(Identifier id, boolean swap) {
+        private static TextureMap getBlockTexture(Identifier id, Block block) {
             return new TextureMap()
                     .put(TextureKey.TEXTURE, id)
-                    .put(TextureKey.NORTH, TextureMap.getSubId(GIK.CARDBOARD, swap ? "_front_swap" : "_front"))
-                    .put(TextureKey.SOUTH, TextureMap.getSubId(GIK.CARDBOARD, swap ? "_front_swap" : "_front"))
-                    .put(TextureKey.EAST, TextureMap.getSubId(GIK.CARDBOARD, swap ? "_top" : "_side"))
-                    .put(TextureKey.WEST, TextureMap.getSubId(GIK.CARDBOARD, swap ? "_top" : "_side"))
-                    .put(TextureKey.UP, TextureMap.getSubId(GIK.CARDBOARD, swap ? "_side" : "_top"))
-                    .put(TextureKey.DOWN, TextureMap.getSubId(GIK.CARDBOARD, swap ? "_side" : "_top"))
-                    .put(TextureKey.PARTICLE, TextureMap.getSubId(GIK.CARDBOARD, "_top"));
+                    .put(TextureKey.FRONT, TextureMap.getSubId(block, "_corrugation"))
+                    .put(TextureKey.BACK, TextureMap.getSubId(block, "_corrugation"))
+                    .put(TextureKey.SIDE, TextureMap.getSubId(block, "_corrugation_side"))
+                    .put(TextureKey.TOP, TextureMap.getSubId(block, "_face_board"))
+                    .put(TextureKey.PARTICLE, TextureMap.getSubId(block, "_face_board"));
         }
+
 
         @Override
         public void generateItemModels(ItemModelGenerator itemModelGenerator) {

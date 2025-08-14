@@ -1,26 +1,34 @@
 {
   "variants": {
-    "axis=x,ominous=false": {
+    "axis=x,type=bottom": {
       "model": "gik:block/cardboard",
       "y": 90
     },
-    "axis=x,ominous=true": {
-      "model": "gik:block/cardboard_swap",
+    "axis=x,type=double": {
+      "model": "gik:block/cardboard_full",
       "y": 90
     },
-    "axis=y,ominous=false": {
-      "model": "gik:block/cardboard",
-      "x": 90
+    "axis=x,type=top": {
+      "model": "gik:block/cardboard_top",
+      "y": 90
     },
-    "axis=y,ominous=true": {
-      "model": "gik:block/cardboard_swap",
-      "x": 90
-    },
-    "axis=z,ominous=false": {
+    "axis=y,type=bottom": {
       "model": "gik:block/cardboard"
     },
-    "axis=z,ominous=true": {
-      "model": "gik:block/cardboard_swap"
+    "axis=y,type=double": {
+      "model": "gik:block/cardboard_full"
+    },
+    "axis=y,type=top": {
+      "model": "gik:block/cardboard_top"
+    },
+    "axis=z,type=bottom": {
+      "model": "gik:block/cardboard"
+    },
+    "axis=z,type=double": {
+      "model": "gik:block/cardboard_full"
+    },
+    "axis=z,type=top": {
+      "model": "gik:block/cardboard_top"
     }
   }
 }
