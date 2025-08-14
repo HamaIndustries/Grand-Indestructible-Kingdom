@@ -3,6 +3,8 @@ package symbolics.division.gik;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockSetType;
+import net.minecraft.block.TrapdoorBlock;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
@@ -38,6 +40,9 @@ public class GIK implements ModInitializer {
     public static final Block VERTICAL_CARDBOARD = Registry.register(Registries.BLOCK, VERTICAL_CARDBOARD_KEY, new VerticalCardboardBlock(AbstractBlock.Settings.create().registryKey(VERTICAL_CARDBOARD_KEY)));
     public static final RegistryKey<Item> VERTICAL_CARDBOARD_ITEM_KEY = RegistryKey.of(RegistryKeys.ITEM, id("vertical_cardboard"));
     public static final Item VERTICAL_CARDBOARD_ITEM = Registry.register(Registries.ITEM, VERTICAL_CARDBOARD_ITEM_KEY, new BlockItem(VERTICAL_CARDBOARD, new Item.Settings().registryKey(VERTICAL_CARDBOARD_ITEM_KEY)));
+
+    public static final Block CARDBOARD_TRAPDOOR = registerBlock("cardboard_trapdoor", settings -> new TrapdoorBlock(BlockSetType.OAK, settings));
+    public static final Item CARDBOARD_TRAPDOOR_ITEM = registerItem("cardboard_trapdoor", settings -> new BlockItem(CARDBOARD_TRAPDOOR, settings));
 
     public static Block registerBlock(String name, Function<AbstractBlock.Settings, Block> blockProvider) {
         Identifier id = id(name);

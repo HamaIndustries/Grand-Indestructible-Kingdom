@@ -48,6 +48,9 @@ public class GIKDataGen implements DataGeneratorEntrypoint {
                             )
             );
 
+            blockStateModelGenerator.registerTrapdoor(GIK.CARDBOARD_TRAPDOOR);
+            blockStateModelGenerator.registerItemModel(GIK.CARDBOARD_ITEM, blockStateModelGenerator.uploadBlockItemModel(GIK.CARDBOARD_ITEM, GIK.CARDBOARD));
+            blockStateModelGenerator.registerItemModel(GIK.VERTICAL_CARDBOARD_ITEM, blockStateModelGenerator.uploadBlockItemModel(GIK.VERTICAL_CARDBOARD_ITEM, GIK.VERTICAL_CARDBOARD));
         }
 
         private static VariantsBlockModelDefinitionCreator registerCardboard(Block block, String name, BlockStateModelGenerator blockStateModelGenerator) {
@@ -86,7 +89,7 @@ public class GIKDataGen implements DataGeneratorEntrypoint {
                     .put(TextureKey.BACK, TextureMap.getSubId(block, "_corrugation"))
                     .put(TextureKey.SIDE, TextureMap.getSubId(block, "_corrugation_side"))
                     .put(TextureKey.TOP, TextureMap.getSubId(block, "_face_board"))
-                    .put(TextureKey.PARTICLE, TextureMap.getSubId(block, "_face_board"));
+                    .put(TextureKey.PARTICLE, TextureMap.getSubId(block, "_face_board_slab"));
         }
 
 

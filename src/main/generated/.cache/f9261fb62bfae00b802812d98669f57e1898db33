@@ -1,11 +1,16 @@
 // 1.21.8	-999999999-01-01T00:00:00	Grand Indestructible Kingdom/Model Definitions
 57d24d3813aac0b85928bc537bc835ebd89a1167 assets/gik/blockstates/cardboard.json
+00cef21b97f9a730a4f54d2abdaffa95d17406aa assets/gik/blockstates/cardboard_trapdoor.json
 c2f5a47c74720baec8af56bf5ee85e43830c74f9 assets/gik/blockstates/vertical_cardboard.json
 6c90a015d17ec6d5a35147c73fe56735970de658 assets/gik/items/cardboard.json
+980dfb988d7aea4ce0e8c521b29bdb151a34bdac assets/gik/items/cardboard_trapdoor.json
 e236ad93d492c300ac4675682cbe19594e1367d7 assets/gik/items/vertical_cardboard.json
 69e879c9f129cf656e0ced1ff0bef0220f8b2da2 assets/gik/models/block/cardboard.json
 3229c2f918db347aa5af3358fafbc3f826cd8cfa assets/gik/models/block/cardboard_full.json
 e2c41cb6137485e8b16a9e0ea91180e8086e6aa6 assets/gik/models/block/cardboard_top.json
+a87b2b7b230f558fcecc7446d0855c302054683d assets/gik/models/block/cardboard_trapdoor_bottom.json
+65ea6055bfae8e071cd6d28fd5c6cc09b174760b assets/gik/models/block/cardboard_trapdoor_open.json
+1542a346b5de2e5852786c26a2a211a3a2fca1f0 assets/gik/models/block/cardboard_trapdoor_top.json
 69c4c06878506543dd93a4b66689990109e5a585 assets/gik/models/block/vertical_cardboard.json
 348c76a4ebfa8aaaca7118d2c1af460ab5a8b16a assets/gik/models/block/vertical_cardboard_full.json
 db3efc7876ec1dc0d016bd43d12a300d6cb1f7cf assets/gik/models/block/vertical_cardboard_top.json
