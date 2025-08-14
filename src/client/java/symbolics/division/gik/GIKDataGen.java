@@ -55,10 +55,10 @@ public class GIKDataGen implements DataGeneratorEntrypoint {
                     .put(TextureKey.TEXTURE, id)
                     .put(TextureKey.NORTH, TextureMap.getSubId(GIK.CARDBOARD, swap ? "_front_swap" : "_front"))
                     .put(TextureKey.SOUTH, TextureMap.getSubId(GIK.CARDBOARD, swap ? "_front_swap" : "_front"))
-                    .put(TextureKey.EAST, TextureMap.getSubId(GIK.CARDBOARD, "_side"))
-                    .put(TextureKey.WEST, TextureMap.getSubId(GIK.CARDBOARD, "_side"))
-                    .put(TextureKey.UP, TextureMap.getSubId(GIK.CARDBOARD, "_top"))
-                    .put(TextureKey.DOWN, TextureMap.getSubId(GIK.CARDBOARD, "_top"))
+                    .put(TextureKey.EAST, TextureMap.getSubId(GIK.CARDBOARD, swap ? "_top" : "_side"))
+                    .put(TextureKey.WEST, TextureMap.getSubId(GIK.CARDBOARD, swap ? "_top" : "_side"))
+                    .put(TextureKey.UP, TextureMap.getSubId(GIK.CARDBOARD, swap ? "_side" : "_top"))
+                    .put(TextureKey.DOWN, TextureMap.getSubId(GIK.CARDBOARD, swap ? "_side" : "_top"))
                     .put(TextureKey.PARTICLE, TextureMap.getSubId(GIK.CARDBOARD, "_top"));
         }
 
