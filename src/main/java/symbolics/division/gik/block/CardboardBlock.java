@@ -5,6 +5,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.block.enums.SlabType;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
@@ -17,7 +18,7 @@ public class CardboardBlock extends SlabBlock {
 
 
     public CardboardBlock(Settings settings) {
-        super(settings);
+        super(settings.sounds(BlockSoundGroup.MOSS_BLOCK));
         this.setDefaultState(this.getDefaultState().with(AXIS, Direction.Axis.Z));
     }
 

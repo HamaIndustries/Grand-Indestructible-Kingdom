@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "gik:cardboard_from_vertical_cardboard"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_vertical_cardboard": {
+      "conditions": {
+        "items": [
+          {
+            "items": "gik:vertical_cardboard"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_vertical_cardboard"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "gik:cardboard_from_vertical_cardboard"
+    ]
+  }
+}

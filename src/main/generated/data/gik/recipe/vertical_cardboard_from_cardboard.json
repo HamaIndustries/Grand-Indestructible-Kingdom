@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "gik:cardboard"
+  ],
+  "result": {
+    "count": 1,
+    "id": "gik:vertical_cardboard"
+  }
+}

@@ -1,0 +1,9 @@
+// 1.21.8	-999999999-01-01T00:00:00	Grand Indestructible Kingdom/cardboard recipes
+020082dbb47013d3c4ccd8765a6417a6e99c3831 data/gik/advancement/recipes/building_blocks/cardboard.json
+b13fe56cb0a752b14094905fcaf35fab29e7b374 data/gik/advancement/recipes/building_blocks/cardboard_trapdoor.json
+ab40b696a1e6db29652a352fca9570865c75286a data/gik/advancement/recipes/misc/cardboard_from_vertical_cardboard.json
+37a38dd015797937d072576c57e29eb47449c6ac data/gik/advancement/recipes/misc/vertical_cardboard_from_cardboard.json
+659f7e7062278f1bfdfb310e0f22c6301dcc4c67 data/gik/recipe/cardboard.json
+9aedbe6b7073d57d6afc6b5710d89818b2b2d9a0 data/gik/recipe/cardboard_from_vertical_cardboard.json
+d2a31cadfd11653fac3c93905cffdb9ec8f82b2d data/gik/recipe/cardboard_trapdoor.json
+b5b71e560a91c0744a5373c8513c3eb71d6aed3f data/gik/recipe/vertical_cardboard_from_cardboard.json

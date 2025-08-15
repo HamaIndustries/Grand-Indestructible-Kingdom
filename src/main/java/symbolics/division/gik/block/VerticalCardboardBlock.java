@@ -33,12 +33,6 @@ public class VerticalCardboardBlock extends CardboardBlock {
             return oldState.with(TYPE, SlabType.DOUBLE);
         }
 
-//        if (state.get(CardboardBlock.TYPE) == SlabType.DOUBLE) {
-////            return state;
-//            Direction.Axis prev = ctx.getWorld().getBlockState(ctx.getBlockPos()).get(AXIS);
-//            return state.with(AXIS, prev);
-//        }
-
         BlockState state = super.getPlacementState(ctx);
         Vec3d center = ctx.getBlockPos().toCenterPos();
         state = state.with(AXIS, ctx.getHorizontalPlayerFacing().rotateYClockwise().getAxis());

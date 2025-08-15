@@ -4,22 +4,30 @@ import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.block.Block;
 import net.minecraft.block.enums.SlabType;
 import net.minecraft.client.data.*;
 import net.minecraft.client.render.model.json.WeightedVariant;
+import net.minecraft.data.recipe.RecipeExporter;
+import net.minecraft.data.recipe.RecipeGenerator;
+import net.minecraft.item.Items;
+import net.minecraft.recipe.book.RecipeCategory;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
 import symbolics.division.gik.block.CardboardBlock;
 
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 
 public class GIKDataGen implements DataGeneratorEntrypoint {
     @Override
     public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {
         var pack = fabricDataGenerator.createPack();
         pack.addProvider(GIKModels::new);
+        pack.addProvider(RecipeProvider::new);
     }
 
     public static class GIKModels extends FabricModelProvider {
@@ -95,8 +103,31 @@ public class GIKDataGen implements DataGeneratorEntrypoint {
 
         @Override
         public void generateItemModels(ItemModelGenerator itemModelGenerator) {
-//            itemModelGenerator.register
-//			itemModelGenerator.registerWithTextureSource(GIK.CARDBOARD_ITEM, Items.OAK_LOG, Models.GENERATED);
+        }
+    }
+
+    private static class RecipeProvider extends FabricRecipeProvider {
+        public RecipeProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+            super(output, registriesFuture);
+        }
+
+        @Override
+        protected RecipeGenerator getRecipeGenerator(RegistryWrapper.WrapperLookup wrapperLookup, RecipeExporter recipeExporter) {
+            return new RecipeGenerator(wrapperLookup, recipeExporter) {
+
+                @Override
+                public void generate() {
+                    offerSlabRecipe(RecipeCategory.BUILDING_BLOCKS, GIK.CARDBOARD_ITEM, Items.PAPER);
+                    offerSingleOutputShapelessRecipe(GIK.CARDBOARD_ITEM, GIK.VERTICAL_CARDBOARD_ITEM, null);
+                    offerSingleOutputShapelessRecipe(GIK.VERTICAL_CARDBOARD_ITEM, GIK.CARDBOARD_ITEM, null);
+                    offer2x2CompactingRecipe(RecipeCategory.BUILDING_BLOCKS, GIK.CARDBOARD_TRAPDOOR, Items.PAPER);
+                }
+            };
+        }
+
+        @Override
+        public String getName() {
+            return "cardboard recipes";
         }
     }
 }
