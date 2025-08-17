@@ -37,8 +37,21 @@ public class GIKDataGen implements DataGeneratorEntrypoint {
 
         @Override
         public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
+            registerCardboard(GIK.CARDBOARD, blockStateModelGenerator);
+            registerCardboard(GIK.SOAKED_CARDBOARD, blockStateModelGenerator);
+            registerVerticalCardboard(GIK.VERTICAL_CARDBOARD, blockStateModelGenerator);
+            registerVerticalCardboard(GIK.SOAKED_VERTICAL_CARDBOARD, blockStateModelGenerator);
+
+            blockStateModelGenerator.registerTrapdoor(GIK.CARDBOARD_TRAPDOOR);
+            blockStateModelGenerator.registerItemModel(GIK.CARDBOARD_ITEM, blockStateModelGenerator.uploadBlockItemModel(GIK.CARDBOARD_ITEM, GIK.CARDBOARD));
+            blockStateModelGenerator.registerItemModel(GIK.VERTICAL_CARDBOARD_ITEM, blockStateModelGenerator.uploadBlockItemModel(GIK.VERTICAL_CARDBOARD_ITEM, GIK.VERTICAL_CARDBOARD));
+        }
+
+        private static void registerCardboard(Block block, BlockStateModelGenerator blockStateModelGenerator) {
+            Identifier id = TextureMap.getId(block);
+            TextureMap textures = getBlockTexture(id, block);
             blockStateModelGenerator.blockStateCollector.accept(
-                    registerCardboard(GIK.CARDBOARD, "cardboard", blockStateModelGenerator)
+                    registerCardboard(block, blockStateModelGenerator, textures)
                             .coordinate(
                                     BlockStateVariantMap.operations(CardboardBlock.AXIS)
                                             .register(Direction.Axis.Z, BlockStateModelGenerator.NO_OP)
@@ -46,8 +59,13 @@ public class GIKDataGen implements DataGeneratorEntrypoint {
                                             .register(Direction.Axis.Y, BlockStateModelGenerator.NO_OP)
                             )
             );
+        }
+
+        private static void registerVerticalCardboard(Block block, BlockStateModelGenerator blockStateModelGenerator) {
+            Identifier id = TextureMap.getId(block);
+            TextureMap textures = getBlockTexture(id, block);
             blockStateModelGenerator.blockStateCollector.accept(
-                    registerCardboard(GIK.VERTICAL_CARDBOARD, "vertical_cardboard", blockStateModelGenerator)
+                    registerCardboard(block, blockStateModelGenerator, textures)
                             .coordinate(
                                     BlockStateVariantMap.operations(CardboardBlock.AXIS)
                                             .register(Direction.Axis.Z, BlockStateModelGenerator.ROTATE_X_90)
@@ -55,15 +73,9 @@ public class GIKDataGen implements DataGeneratorEntrypoint {
                                             .register(Direction.Axis.Y, BlockStateModelGenerator.NO_OP)
                             )
             );
-
-            blockStateModelGenerator.registerTrapdoor(GIK.CARDBOARD_TRAPDOOR);
-            blockStateModelGenerator.registerItemModel(GIK.CARDBOARD_ITEM, blockStateModelGenerator.uploadBlockItemModel(GIK.CARDBOARD_ITEM, GIK.CARDBOARD));
-            blockStateModelGenerator.registerItemModel(GIK.VERTICAL_CARDBOARD_ITEM, blockStateModelGenerator.uploadBlockItemModel(GIK.VERTICAL_CARDBOARD_ITEM, GIK.VERTICAL_CARDBOARD));
         }
 
-        private static VariantsBlockModelDefinitionCreator registerCardboard(Block block, String name, BlockStateModelGenerator blockStateModelGenerator) {
-            Identifier id = TextureMap.getId(block);
-            TextureMap textures = getBlockTexture(id, block);
+        private static VariantsBlockModelDefinitionCreator registerCardboard(Block block, BlockStateModelGenerator blockStateModelGenerator, TextureMap textures) {
             Model slabModel = new Model(Optional.of(GIK.id("block/directed_slab")), Optional.empty(), TextureKey.TOP, TextureKey.SIDE, TextureKey.FRONT, TextureKey.BACK);
             Model slabModelTop = new Model(Optional.of(GIK.id("block/directed_slab_top")), Optional.of("_top"), TextureKey.TOP, TextureKey.SIDE, TextureKey.FRONT, TextureKey.BACK);
 
@@ -78,8 +90,6 @@ public class GIKDataGen implements DataGeneratorEntrypoint {
             WeightedVariant full = BlockStateModelGenerator.createWeightedVariant(
                     blockModel.uploadWithoutVariant(block, "_full", textures, blockStateModelGenerator.modelCollector)
             );
-
-//            blockStateModelGenerator.registerItemModel(block);
 
             return VariantsBlockModelDefinitionCreator.of(block)
                     .with(

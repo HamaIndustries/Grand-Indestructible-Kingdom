@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "axis=x,type=bottom": {
+      "model": "gik:block/soaked_cardboard",
+      "y": 90
+    },
+    "axis=x,type=double": {
+      "model": "gik:block/soaked_cardboard_full",
+      "y": 90
+    },
+    "axis=x,type=top": {
+      "model": "gik:block/soaked_cardboard_top",
+      "y": 90
+    },
+    "axis=y,type=bottom": {
+      "model": "gik:block/soaked_cardboard"
+    },
+    "axis=y,type=double": {
+      "model": "gik:block/soaked_cardboard_full"
+    },
+    "axis=y,type=top": {
+      "model": "gik:block/soaked_cardboard_top"
+    },
+    "axis=z,type=bottom": {
+      "model": "gik:block/soaked_cardboard"
+    },
+    "axis=z,type=double": {
+      "model": "gik:block/soaked_cardboard_full"
+    },
+    "axis=z,type=top": {
+      "model": "gik:block/soaked_cardboard_top"
+    }
+  }
+}
