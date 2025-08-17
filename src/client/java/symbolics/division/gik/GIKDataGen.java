@@ -5,14 +5,19 @@ import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.block.Block;
 import net.minecraft.block.enums.SlabType;
 import net.minecraft.client.data.*;
 import net.minecraft.client.render.model.json.WeightedVariant;
 import net.minecraft.data.recipe.RecipeExporter;
 import net.minecraft.data.recipe.RecipeGenerator;
+import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
@@ -138,6 +143,36 @@ public class GIKDataGen implements DataGeneratorEntrypoint {
         @Override
         public String getName() {
             return "cardboard recipes";
+        }
+    }
+
+    private static class ItemTagProvider extends FabricTagProvider<Item> {
+        public ItemTagProvider(FabricDataOutput output, RegistryKey<? extends Registry<Item>> registryKey, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+            super(output, registryKey, registriesFuture);
+        }
+
+        @Override
+        protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
+            getTagBuilder(GIK.CARDBOARD_ITEM_TAG)
+                    .add(GIK.CARDBOARD_ITEM_KEY.getValue())
+                    .add(GIK.VERTICAL_CARDBOARD_ITEM_KEY.getValue())
+                    .add(Registries.ITEM.getId(GIK.CARDBOARD_TRAPDOOR_ITEM));
+        }
+    }
+
+    private static class BlockTagProvider extends FabricTagProvider<Block> {
+        public BlockTagProvider(FabricDataOutput output, RegistryKey<? extends Registry<Block>> registryKey, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+            super(output, registryKey, registriesFuture);
+        }
+
+        @Override
+        protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
+            getTagBuilder(GIK.CARDBOARD_BLOCK_TAG)
+                    .add(GIK.CARDBOARD_KEY.getValue())
+                    .add(GIK.VERTICAL_CARDBOARD_KEY.getValue())
+                    .add(Registries.BLOCK.getId(GIK.SOAKED_CARDBOARD))
+                    .add(Registries.BLOCK.getId(GIK.SOAKED_VERTICAL_CARDBOARD))
+                    .add(Registries.BLOCK.getId(GIK.CARDBOARD_TRAPDOOR));
         }
     }
 }

@@ -11,6 +11,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,6 +46,9 @@ public class GIK implements ModInitializer {
 
     public static final Block CARDBOARD_TRAPDOOR = registerBlock("cardboard_trapdoor", settings -> new TrapdoorBlock(BlockSetType.OAK, settings));
     public static final Item CARDBOARD_TRAPDOOR_ITEM = registerItem("cardboard_trapdoor", settings -> new BlockItem(CARDBOARD_TRAPDOOR, settings));
+
+    public static final TagKey<Block> CARDBOARD_BLOCK_TAG = TagKey.of(RegistryKeys.BLOCK, Identifier.of("c", "cardboard"));
+    public static final TagKey<Item> CARDBOARD_ITEM_TAG = TagKey.of(RegistryKeys.ITEM, Identifier.of("c", "cardboard"));
 
     public static Block registerBlock(String name, Function<AbstractBlock.Settings, Block> blockProvider) {
         Identifier id = id(name);
