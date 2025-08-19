@@ -1,5 +1,10 @@
 {
   "item.gik.cardboard": "Cardboard",
   "item.gik.vertical_cardboard": "Vertical Cardboard",
-  "item.gik.cardboard_trapdoor": "Cardboard Trapdoor"
+  "item.gik.cardboard_trapdoor": "Cardboard Trapdoor",
+  "block.gik.cardboard": "Cardboard",
+  "block.gik.soaked_cardboard": "Soaked Cardboard",
+  "block.gik.vertical_cardboard": "Vertical Cardboard",
+  "block.gik.soaked_vertical_cardboard": "Soaked Vertical Coardboard",
+  "block.gik.cardboard_trapdoor": "Cardboard Trapdoor"
 }
