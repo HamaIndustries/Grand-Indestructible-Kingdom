@@ -2,12 +2,14 @@ package symbolics.division.gik.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.block.enums.SlabType;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.entity.projectile.thrown.SplashPotionEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.registry.tag.FluidTags;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
@@ -54,13 +56,28 @@ public class CardboardBlock extends SlabBlock {
     }
 
     @Override
+    protected void onStateReplaced(BlockState state, ServerWorld world, BlockPos pos, boolean moved) {
+        if (!moved && soaked(state) && world.getBlockState(pos).isOf(Blocks.AIR)) {
+            for (Direction dir : Direction.values()) {
+                BlockPos p2 = pos.offset(dir, 1);
+                GIK.schedule(() -> {
+                    BlockState bs = world.getBlockState(p2);
+                    boolean b = soaked(bs);
+                    if (b) world.breakBlock(p2, false);
+                }, 1);
+            }
+        }
+        super.onStateReplaced(state, world, pos, moved);
+    }
+
+    @Override
     protected BlockState getStateForNeighborUpdate(BlockState state, WorldView world, ScheduledTickView tickView, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, Random random) {
         return neighborState.getFluidState().isIn(FluidTags.WATER) ? GIK.SOAKED_CARDBOARD.getStateWithProperties(state) : state;
     }
 
     @Override
     protected void onProjectileHit(World world, BlockState state, BlockHitResult hit, ProjectileEntity projectile) {
-        if (state.isOf(GIK.SOAKED_CARDBOARD) || state.isOf(GIK.SOAKED_VERTICAL_CARDBOARD)) {
+        if (!world.isClient && state.isOf(GIK.SOAKED_CARDBOARD) || state.isOf(GIK.SOAKED_VERTICAL_CARDBOARD)) {
             if (projectile instanceof SplashPotionEntity) return;
             world.breakBlock(hit.getBlockPos(), false, projectile.getOwner());
             return;
@@ -69,11 +86,16 @@ public class CardboardBlock extends SlabBlock {
     }
 
     public static void soak(World world, BlockPos pos) {
+        if (world.isClient) return;
         BlockState state = world.getBlockState(pos);
         if (state.isOf(GIK.CARDBOARD)) {
             world.setBlockState(pos, GIK.SOAKED_CARDBOARD.getStateWithProperties(state));
         } else if (state.isOf(GIK.VERTICAL_CARDBOARD)) {
             world.setBlockState(pos, GIK.SOAKED_VERTICAL_CARDBOARD.getStateWithProperties(state));
         }
+    }
+
+    public static boolean soaked(BlockState state) {
+        return state.isOf(GIK.SOAKED_CARDBOARD) || state.isOf(GIK.SOAKED_VERTICAL_CARDBOARD);
     }
 }
