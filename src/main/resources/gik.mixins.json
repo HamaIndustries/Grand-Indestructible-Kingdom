@@ -3,8 +3,7 @@
   "package": "symbolics.division.gik.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "PotionEntityMixin",
-    "compat.ZipToItCompat"
+    "PotionEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1
