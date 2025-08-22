@@ -15,10 +15,7 @@ import net.minecraft.data.recipe.RecipeGenerator;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.registry.*;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
@@ -33,6 +30,8 @@ public class GIKDataGen implements DataGeneratorEntrypoint {
         var pack = fabricDataGenerator.createPack();
         pack.addProvider(GIKModels::new);
         pack.addProvider(RecipeProvider::new);
+        pack.addProvider((output, registriesFuture) -> new ItemTagProvider(output, RegistryKeys.ITEM, registriesFuture));
+        pack.addProvider((output, registriesFuture) -> new BlockTagProvider(output, RegistryKeys.BLOCK, registriesFuture));
     }
 
     public static class GIKModels extends FabricModelProvider {

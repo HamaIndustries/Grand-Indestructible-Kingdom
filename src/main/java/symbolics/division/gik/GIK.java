@@ -3,18 +3,21 @@ package symbolics.division.gik;
 import it.unimi.dsi.fastutil.objects.ReferenceArrayList;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSetType;
 import net.minecraft.block.TrapdoorBlock;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
 import org.slf4j.Logger;
@@ -66,6 +69,19 @@ public class GIK implements ModInitializer {
         RegistryKey<Item> key = RegistryKey.of(RegistryKeys.ITEM, id);
         return Registry.register(Registries.ITEM, id, itemProvider.apply(new Item.Settings().registryKey(key)));
     }
+
+    ItemGroup HOME_DEPOT = Registry.register(
+            Registries.ITEM_GROUP,
+            id(MOD_ID),
+            FabricItemGroup.builder()
+                    .displayName(Text.translatable("itemGroup.gik"))
+                    .icon(CARDBOARD_ITEM::getDefaultStack)
+                    .entries((context, entries) -> {
+                        entries.add(CARDBOARD_ITEM);
+                        entries.add(VERTICAL_CARDBOARD_ITEM);
+                        entries.add(CARDBOARD_TRAPDOOR_ITEM);
+                    }).build()
+    );
 
 
     @Override
