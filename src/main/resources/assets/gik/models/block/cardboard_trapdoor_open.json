@@ -1,0 +1,22 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"1": "gik:block/cardboard_face_board",
+		"2": "gik:block/trapdoor_ends",
+		"particle": "gik:block/cardboard_face_board"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 13],
+			"to": [16, 16, 16],
+			"faces": {
+				"north": {"uv": [0, 16, 16, 0], "rotation": 180, "texture": "#1"},
+				"east": {"uv": [0, 13, 16, 16], "rotation": 90, "texture": "#2", "cullface": "east"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#1", "cullface": "south"},
+				"west": {"uv": [0, 13, 16, 16], "rotation": 270, "texture": "#2", "cullface": "west"},
+				"up": {"uv": [0, 10, 16, 13], "texture": "#2", "cullface": "up"},
+				"down": {"uv": [0, 10, 16, 13], "rotation": 180, "texture": "#2", "cullface": "down"}
+			}
+		}
+	]
+}

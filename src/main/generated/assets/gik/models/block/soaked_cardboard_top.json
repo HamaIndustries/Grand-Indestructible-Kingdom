@@ -4,6 +4,7 @@
     "back": "gik:block/soaked_cardboard_corrugation",
     "front": "gik:block/soaked_cardboard_corrugation",
     "side": "gik:block/soaked_cardboard_corrugation_side",
-    "top": "gik:block/soaked_cardboard_face_board"
+    "top": "gik:block/soaked_cardboard_face_board",
+    "bottom": "gik:block/soaked_cardboard_face_board_slab"
   }
 }

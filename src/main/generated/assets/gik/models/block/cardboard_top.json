@@ -4,6 +4,7 @@
     "back": "gik:block/cardboard_corrugation",
     "front": "gik:block/cardboard_corrugation",
     "side": "gik:block/cardboard_corrugation_side",
-    "top": "gik:block/cardboard_face_board"
+    "top": "gik:block/cardboard_face_board",
+    "bottom": "gik:block/cardboard_face_board_slab"
   }
 }

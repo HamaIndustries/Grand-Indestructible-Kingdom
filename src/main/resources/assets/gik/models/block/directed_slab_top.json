@@ -22,7 +22,7 @@
             16,
             16
           ],
-          "texture": "#top"
+          "texture": "#bottom"
         },
         "up": {
           "uv": [
