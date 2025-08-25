@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import symbolics.division.gik.compat.ZipCasterCompat;
 
 @Pseudo
-@Mixin(targets = "net.superkat.ziptoit.ZipToIt")
+@Mixin(targets = "net.superkat.ziptoit.ZipToIt", remap = false)
 public class ZipToItCompat {
     @Inject(
             method = "onInitialize",
