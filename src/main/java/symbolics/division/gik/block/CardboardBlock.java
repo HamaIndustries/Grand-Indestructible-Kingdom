@@ -1,5 +1,7 @@
 package symbolics.division.gik.block;
 
+import dev.doublekekse.area_lib.Area;
+import dev.doublekekse.area_lib.data.AreaSavedData;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -23,6 +25,9 @@ import net.minecraft.world.WorldView;
 import net.minecraft.world.tick.ScheduledTickView;
 import org.jetbrains.annotations.Nullable;
 import symbolics.division.gik.GIK;
+import symbolics.division.gik.compat.AntisoakingAreaComponent;
+
+import java.util.List;
 
 public class CardboardBlock extends SlabBlock {
     public static final EnumProperty<Direction.Axis> AXIS = Properties.AXIS;
@@ -86,7 +91,7 @@ public class CardboardBlock extends SlabBlock {
     }
 
     public static void soak(World world, BlockPos pos) {
-        if (world.isClient) return;
+        if (world.isClient || !soakAllowed((ServerWorld) world, pos)) return;
         BlockState state = world.getBlockState(pos);
         if (state.isOf(GIK.CARDBOARD)) {
             world.setBlockState(pos, GIK.SOAKED_CARDBOARD.getStateWithProperties(state));
@@ -97,5 +102,10 @@ public class CardboardBlock extends SlabBlock {
 
     public static boolean soaked(BlockState state) {
         return state.isOf(GIK.SOAKED_CARDBOARD) || state.isOf(GIK.SOAKED_VERTICAL_CARDBOARD);
+    }
+
+    public static boolean soakAllowed(ServerWorld world, BlockPos pos) {
+        List<Area> areas = AreaSavedData.getServerData(world.getServer()).findTrackedAreasContaining(world, pos.toCenterPos());
+        return areas.stream().noneMatch(a -> a.has(AntisoakingAreaComponent.TYPE));
     }
 }

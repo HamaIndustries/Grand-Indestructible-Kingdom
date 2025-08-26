@@ -24,6 +24,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import symbolics.division.gik.block.CardboardBlock;
 import symbolics.division.gik.block.VerticalCardboardBlock;
+import symbolics.division.gik.compat.AntisoakingAreaComponent;
 
 import java.util.List;
 import java.util.function.Function;
@@ -87,6 +88,7 @@ public class GIK implements ModInitializer {
     @Override
     public void onInitialize() {
         ServerTickEvents.START_SERVER_TICK.register(GIK::tick);
+        AntisoakingAreaComponent.register();
     }
 
     private static final List<Pair<Integer, Runnable>> actions = new ReferenceArrayList<>();

@@ -7,5 +7,7 @@
   "block.gik.vertical_cardboard": "Vertical Cardboard",
   "block.gik.soaked_vertical_cardboard": "Soaked Vertical Coardboard",
   "block.gik.cardboard_trapdoor": "Cardboard Trapdoor",
-  "itemGroup.gik": "Grand Indestructible Kingdom"
+  "itemGroup.gik": "Grand Indestructible Kingdom",
+  "gik.command.restrict.success": "Restricted soaking in area.",
+  "gik.command.clear.success": "Allowed soaking in area."
 }
