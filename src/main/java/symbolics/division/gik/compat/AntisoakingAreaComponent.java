@@ -68,7 +68,7 @@ public class AntisoakingAreaComponent implements AreaDataComponent {
     public static void register() {
         CommandRegistrationCallback.EVENT.register((dispatcher, access, environment) ->
                 dispatcher.register(literal("gik")
-                        .then(literal("restrict")
+                        .then(literal("allow")
                                 .then(argument("area", AreaArgument.area())
                                         .then((LiteralArgumentBuilder) literal("please").executes(ctx -> AntisoakingAreaComponent.restrict((CommandContext<ServerCommandSource>) (Object) ctx))
                                         ))

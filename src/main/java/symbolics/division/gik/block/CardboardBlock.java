@@ -106,6 +106,6 @@ public class CardboardBlock extends SlabBlock {
 
     public static boolean soakAllowed(ServerWorld world, BlockPos pos) {
         List<Area> areas = AreaSavedData.getServerData(world.getServer()).findTrackedAreasContaining(world, pos.toCenterPos());
-        return areas.stream().noneMatch(a -> a.has(AntisoakingAreaComponent.TYPE));
+        return areas.stream().anyMatch(a -> a.has(AntisoakingAreaComponent.TYPE));
     }
 }
