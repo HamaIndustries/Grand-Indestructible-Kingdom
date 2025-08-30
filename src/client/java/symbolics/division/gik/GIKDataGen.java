@@ -16,6 +16,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.*;
+import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
@@ -41,14 +42,22 @@ public class GIKDataGen implements DataGeneratorEntrypoint {
 
         @Override
         public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
-            registerCardboard(GIK.CARDBOARD, blockStateModelGenerator);
-            registerCardboard(GIK.SOAKED_CARDBOARD, blockStateModelGenerator);
-            registerVerticalCardboard(GIK.VERTICAL_CARDBOARD, blockStateModelGenerator);
-            registerVerticalCardboard(GIK.SOAKED_VERTICAL_CARDBOARD, blockStateModelGenerator);
+//            registerCardboard(GIK.CARDBOARD, blockStateModelGenerator);
+//            registerCardboard(GIK.SOAKED_CARDBOARD, blockStateModelGenerator);
+//            registerVerticalCardboard(GIK.VERTICAL_CARDBOARD, blockStateModelGenerator);
+//            registerVerticalCardboard(GIK.SOAKED_VERTICAL_CARDBOARD, blockStateModelGenerator);
+//
 
-            blockStateModelGenerator.registerTrapdoor(GIK.CARDBOARD_TRAPDOOR);
-            blockStateModelGenerator.registerItemModel(GIK.CARDBOARD_ITEM, blockStateModelGenerator.uploadBlockItemModel(GIK.CARDBOARD_ITEM, GIK.CARDBOARD));
-            blockStateModelGenerator.registerItemModel(GIK.VERTICAL_CARDBOARD_ITEM, blockStateModelGenerator.uploadBlockItemModel(GIK.VERTICAL_CARDBOARD_ITEM, GIK.VERTICAL_CARDBOARD));
+            // uncomment to allow parent
+//            blockStateModelGenerator.registerTrapdoor(GIK.CARDBOARD_TRAPDOOR);
+
+
+//            blockStateModelGenerator.registerTrapdoor(GIK.SOAKED_CARDBOARD_TRAPDOOR);
+//            blockStateModelGenerator.registerItemModel(GIK.CARDBOARD_ITEM, blockStateModelGenerator.uploadBlockItemModel(GIK.CARDBOARD_ITEM, GIK.CARDBOARD));
+//            blockStateModelGenerator.registerItemModel(GIK.VERTICAL_CARDBOARD_ITEM, blockStateModelGenerator.uploadBlockItemModel(GIK.VERTICAL_CARDBOARD_ITEM, GIK.VERTICAL_CARDBOARD));
+
+//            blockStateModelGenerator.registerParented(GIK.CARDBOARD_TRAPDOOR, GIK.SOAKED_CARDBOARD_TRAPDOOR);
+            blockStateModelGenerator.registerParentedTrapdoor(GIK.CARDBOARD_TRAPDOOR, GIK.SOAKED_CARDBOARD_TRAPDOOR);
         }
 
         private static void registerCardboard(Block block, BlockStateModelGenerator blockStateModelGenerator) {
@@ -156,6 +165,10 @@ public class GIKDataGen implements DataGeneratorEntrypoint {
                     .add(GIK.CARDBOARD_ITEM_KEY.getValue())
                     .add(GIK.VERTICAL_CARDBOARD_ITEM_KEY.getValue())
                     .add(Registries.ITEM.getId(GIK.CARDBOARD_TRAPDOOR_ITEM));
+
+            getTagBuilder(ItemTags.TRAPDOORS)
+                    .add(GIK.CARDBOARD_TRAPDOOR_ITEM.getRegistryEntry().registryKey().getValue())
+            ;
         }
     }
 
@@ -172,6 +185,14 @@ public class GIKDataGen implements DataGeneratorEntrypoint {
                     .add(Registries.BLOCK.getId(GIK.SOAKED_CARDBOARD))
                     .add(Registries.BLOCK.getId(GIK.SOAKED_VERTICAL_CARDBOARD))
                     .add(Registries.BLOCK.getId(GIK.CARDBOARD_TRAPDOOR));
+
+//            getTagBuilder(BlockTags.TRAPDOORS)
+//                    .add(GIK.CARDBOARD_TRAPDOOR.getRegistryEntry().registryKey().getValue());
+
+            getTagBuilder(GIK.SOAKED)
+                    .add(Registries.BLOCK.getId(GIK.SOAKED_CARDBOARD))
+                    .add(Registries.BLOCK.getId(GIK.SOAKED_VERTICAL_CARDBOARD))
+                    .add(Registries.BLOCK.getId(GIK.SOAKED_CARDBOARD_TRAPDOOR));
         }
     }
 }

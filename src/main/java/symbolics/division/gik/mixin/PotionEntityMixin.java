@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import symbolics.division.gik.block.CardboardBlock;
+import symbolics.division.gik.block.Soakable;
 
 @Mixin(PotionEntity.class)
 public class PotionEntityMixin {
@@ -19,7 +19,7 @@ public class PotionEntityMixin {
     )
     public void wetten(ServerWorld world, CallbackInfo ci, @Local(ordinal = 0) Box box) {
         for (BlockPos pos : BlockPos.iterate(box)) {
-            CardboardBlock.soak(world, pos);
+            Soakable.soak(world, pos);
         }
     }
 }

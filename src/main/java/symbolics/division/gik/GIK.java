@@ -6,8 +6,6 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockSetType;
-import net.minecraft.block.TrapdoorBlock;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -23,6 +21,7 @@ import net.minecraft.util.Pair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import symbolics.division.gik.block.CardboardBlock;
+import symbolics.division.gik.block.CardboardTrapdoor;
 import symbolics.division.gik.block.VerticalCardboardBlock;
 import symbolics.division.gik.compat.AntisoakingAreaComponent;
 
@@ -42,24 +41,26 @@ public class GIK implements ModInitializer {
     }
 
     public static final RegistryKey<Block> CARDBOARD_KEY = RegistryKey.of(RegistryKeys.BLOCK, id("cardboard"));
-    public static final Block CARDBOARD = Registry.register(Registries.BLOCK, CARDBOARD_KEY, new CardboardBlock(AbstractBlock.Settings.create().registryKey(CARDBOARD_KEY)));
+    public static final CardboardBlock CARDBOARD = Registry.register(Registries.BLOCK, CARDBOARD_KEY, new CardboardBlock(AbstractBlock.Settings.create().registryKey(CARDBOARD_KEY)));
     public static final RegistryKey<Item> CARDBOARD_ITEM_KEY = RegistryKey.of(RegistryKeys.ITEM, id("cardboard"));
     public static final Item CARDBOARD_ITEM = Registry.register(Registries.ITEM, CARDBOARD_ITEM_KEY, new BlockItem(CARDBOARD, new Item.Settings().registryKey(CARDBOARD_ITEM_KEY)));
-    public static final Block SOAKED_CARDBOARD = registerBlock("soaked_cardboard", CardboardBlock::new);
+    public static final CardboardBlock SOAKED_CARDBOARD = registerBlock("soaked_cardboard", CardboardBlock::new);
 
     public static final RegistryKey<Block> VERTICAL_CARDBOARD_KEY = RegistryKey.of(RegistryKeys.BLOCK, id("vertical_cardboard"));
-    public static final Block VERTICAL_CARDBOARD = Registry.register(Registries.BLOCK, VERTICAL_CARDBOARD_KEY, new VerticalCardboardBlock(AbstractBlock.Settings.create().registryKey(VERTICAL_CARDBOARD_KEY)));
+    public static final CardboardBlock VERTICAL_CARDBOARD = Registry.register(Registries.BLOCK, VERTICAL_CARDBOARD_KEY, new VerticalCardboardBlock(AbstractBlock.Settings.create().registryKey(VERTICAL_CARDBOARD_KEY)));
     public static final RegistryKey<Item> VERTICAL_CARDBOARD_ITEM_KEY = RegistryKey.of(RegistryKeys.ITEM, id("vertical_cardboard"));
     public static final Item VERTICAL_CARDBOARD_ITEM = Registry.register(Registries.ITEM, VERTICAL_CARDBOARD_ITEM_KEY, new BlockItem(VERTICAL_CARDBOARD, new Item.Settings().registryKey(VERTICAL_CARDBOARD_ITEM_KEY)));
-    public static final Block SOAKED_VERTICAL_CARDBOARD = registerBlock("soaked_vertical_cardboard", VerticalCardboardBlock::new);
+    public static final CardboardBlock SOAKED_VERTICAL_CARDBOARD = registerBlock("soaked_vertical_cardboard", VerticalCardboardBlock::new);
 
-    public static final Block CARDBOARD_TRAPDOOR = registerBlock("cardboard_trapdoor", settings -> new TrapdoorBlock(BlockSetType.OAK, settings));
+    public static final Block CARDBOARD_TRAPDOOR = registerBlock("cardboard_trapdoor", settings -> new CardboardTrapdoor(settings, false));
+    public static final Block SOAKED_CARDBOARD_TRAPDOOR = registerBlock("soaked_cardboard_trapdoor", settings -> new CardboardTrapdoor(settings, true));
     public static final Item CARDBOARD_TRAPDOOR_ITEM = registerItem("cardboard_trapdoor", settings -> new BlockItem(CARDBOARD_TRAPDOOR, settings));
 
     public static final TagKey<Block> CARDBOARD_BLOCK_TAG = TagKey.of(RegistryKeys.BLOCK, Identifier.of("c", "cardboard"));
     public static final TagKey<Item> CARDBOARD_ITEM_TAG = TagKey.of(RegistryKeys.ITEM, Identifier.of("c", "cardboard"));
+    public static final TagKey<Block> SOAKED = TagKey.of(RegistryKeys.BLOCK, id("soaked"));
 
-    public static Block registerBlock(String name, Function<AbstractBlock.Settings, Block> blockProvider) {
+    public static <T extends Block> T registerBlock(String name, Function<AbstractBlock.Settings, T> blockProvider) {
         Identifier id = id(name);
         RegistryKey<Block> key = RegistryKey.of(RegistryKeys.BLOCK, id);
         return Registry.register(Registries.BLOCK, key, blockProvider.apply(AbstractBlock.Settings.create().registryKey(key)));
