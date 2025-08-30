@@ -1,22 +1,21 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"1": "gik:block/cardboard_face_board",
+		"1": "gik:block/cardboard_face_board_slab",
 		"2": "gik:block/trapdoor_ends",
-		"particle": "gik:block/cardboard_face_board"
+		"particle": "gik:block/cardboard_face_board_slab"
 	},
 	"elements": [
 		{
 			"from": [0, 0, 0],
 			"to": [16, 3, 16],
-			"rotation": {"angle": 0, "axis": "y", "origin": [8, 1.5, 8]},
 			"faces": {
-				"north": {"uv": [0, 13, 16, 16], "texture": "#2", "cullface": "west"},
-				"east": {"uv": [0, 10, 16, 13], "texture": "#2", "cullface": "north"},
-				"south": {"uv": [0, 13, 16, 16], "texture": "#2", "cullface": "east"},
-				"west": {"uv": [0, 10, 16, 13], "texture": "#2", "cullface": "south"},
-				"up": {"uv": [0, 16, 16, 0], "rotation": 90, "texture": "#1"},
-				"down": {"uv": [0, 0, 16, 16], "rotation": 270, "texture": "#1", "cullface": "down"}
+				"north": {"uv": [0, 10, 16, 13], "texture": "#2", "cullface": "north"},
+				"east": {"uv": [0, 13, 16, 16], "texture": "#2", "cullface": "east"},
+				"south": {"uv": [0, 10, 16, 13], "texture": "#2", "cullface": "south"},
+				"west": {"uv": [0, 13, 16, 16], "texture": "#2", "cullface": "west"},
+				"up": {"uv": [0, 16, 16, 0], "texture": "#1"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#1", "cullface": "down"}
 			}
 		}
 	],
