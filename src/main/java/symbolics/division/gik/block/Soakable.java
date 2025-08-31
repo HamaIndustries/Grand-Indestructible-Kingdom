@@ -23,7 +23,7 @@ public interface Soakable {
     static void soak(World world, BlockPos pos) {
         if (world.isClient) return;
         BlockState state = world.getBlockState(pos);
-        if (state.getBlock() instanceof Soakable soakable && !soakable.isSoaked(state)) {
+        if (state.getBlock() instanceof Soakable soakable && soakAllowed(world, pos)) {
             world.setBlockState(pos, soakable.getSoakedVersion(state));
         }
     }
