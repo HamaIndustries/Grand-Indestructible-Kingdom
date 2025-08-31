@@ -9,5 +9,22 @@
   "block.gik.cardboard_trapdoor": "Cardboard Trapdoor",
   "itemGroup.gik": "Grand Indestructible Kingdom",
   "gik.command.restrict.success": "Allowed soaking in area.",
-  "gik.command.clear.success": "Revoked soaking in area."
+  "gik.command.clear.success": "Revoked soaking in area.",
+
+  "sticker.gik.packing_tape": "Sticky Packing Tape",
+  "sticker.gik.pkg_flammable": "Flammable Package Sticker",
+  "sticker.gik.pkg_flammable_alt": "Flammable Package Sticker [alt]",
+  "sticker.gik.pkg_fragile": "Fragile Package Sticker",
+  "sticker.gik.pkg_fragile_alt": "Fragile Package Sticker [alt]",
+  "sticker.gik.pkg_no_step": "No Step Package Sticker",
+  "sticker.gik.pkg_no_step_alt": "No Step Package Sticker [alt]",
+  "sticker.gik.pkg_this_side_up": "This Side Up Package Sticker",
+  "sticker.gik.pkg_this_side_up_alt": "This Side Up Package Sticker [alt]",
+  "sticker.gik.pkg_steveco": "Steve Co. Package Sticker",
+  "sticker.gik.pkg_steveco_alt": "Steve Co. Package Sticker [alt]",
+  "sticker.gik.steveco_text": "Steve Co. Text Package Sticker",
+
+  "sticker.gik.steveco_small": "Steve Co. Supply Crate Sticker",
+  "sticker.gik.steveco_key": "Steve Co. Supply Crate Key Sticker"
+
 }
