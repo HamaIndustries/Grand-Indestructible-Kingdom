@@ -2,6 +2,7 @@ package symbolics.division.gik.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.MapColor;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.block.enums.SlabType;
 import net.minecraft.entity.projectile.ProjectileEntity;
@@ -82,5 +83,10 @@ public class CardboardBlock extends SlabBlock implements Soakable {
     @Override
     public BlockState getSoakedVersion(BlockState state) {
         return GIK.SOAKED_CARDBOARD.getStateWithProperties(state);
+    }
+
+    @Override
+    public MapColor getDefaultMapColor() {
+        return MapColor.DIRT_BROWN;
     }
 }

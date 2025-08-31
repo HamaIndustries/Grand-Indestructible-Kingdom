@@ -1,9 +1,6 @@
 package symbolics.division.gik.block;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockSetType;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.TrapdoorBlock;
+import net.minecraft.block.*;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.entity.projectile.thrown.SplashPotionEntity;
 import net.minecraft.item.ItemPlacementContext;
@@ -77,5 +74,10 @@ public class CardboardTrapdoor extends TrapdoorBlock implements Soakable {
     @Override
     public BlockState getSoakedVersion(BlockState state) {
         return GIK.SOAKED_CARDBOARD_TRAPDOOR.getStateWithProperties(state);
+    }
+
+    @Override
+    public MapColor getDefaultMapColor() {
+        return MapColor.DIRT_BROWN;
     }
 }
